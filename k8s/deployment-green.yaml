@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: myapp
+  namespace: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+      version: green
+  template:
+    metadata:
+      labels:
+        app: myapp
+        version: green
+    spec:
+      containers:
+       - name: myapp
+         image: us-central1-docker.pkg.dev/my-first-k8s-test-project/blue-green-repo/myapp:REPLACE_TAG
+         ports:
+           - containerPort: 8080
+         env:
+            - name: COLOR
+              value: "green"
+            - name: VERSION
+              value: "REPLACE_TAG"
+         readinessProbe:
+           initialDelaySeconds: 2
+           periodSeconds: 5
+           httpGet:
+             path: /readyz
+             port: 8080
+        livenessProbe:
+          initialDelaySeconds: 2
+          periodSeconds: 10
+          httpGet:
+            path: /readyz
+            port: 8080
