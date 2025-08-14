@@ -1,37 +1,38 @@
-Here’s a **README.md** you can drop directly into your repo that will make the project look professional, clear, and portfolio-ready — no diagrams, just solid explanation and instructions.
-
----
-
-```markdown
 # GKE Blue-Green Zero Downtime Deployment
 
-Zero downtime Kubernetes deployments on **Google Kubernetes Engine (GKE)** using a **Blue-Green deployment strategy** and **GitHub Actions** CI/CD pipeline.  
+Zero downtime Kubernetes deployments on **Google Kubernetes Engine (GKE)** using a **Blue-Green deployment strategy** and **GitHub Actions** CI/CD pipeline.
 This project demonstrates a **production-ready** workflow for deploying a containerized application to Kubernetes without impacting live users.
 
 ---
 
 ## 📌 Project Overview
-- **Stack:** Kubernetes (GKE Autopilot), Docker, GitHub Actions, Google Artifact Registry
-- **Deployment Strategy:** Blue-Green
-- **Pipeline Features:**
-  - Fully automated builds and deployments
-  - Pushes Docker images to Google Artifact Registry
-  - Deploys to GKE with Blue-Green switching
-  - Supports instant rollback
+
+* **Stack:** Kubernetes (GKE Autopilot), Docker, GitHub Actions, Google Artifact Registry
+* **Deployment Strategy:** Blue-Green
+* **Pipeline Features:**
+
+  * Fully automated builds and deployments
+  * Pushes Docker images to Google Artifact Registry
+  * Deploys to GKE with Blue-Green switching
+  * Supports instant rollback
 
 ---
 
 ## 🚀 Why Blue-Green?
+
 Blue-Green deployment ensures **zero downtime** during updates:
-- **Blue** = current live version
-- **Green** = new version deployed in parallel
-- Traffic is switched to the green version only after it passes checks
-- Rollback is as simple as switching back to blue
+
+* **Blue** = current live version
+* **Green** = new version deployed in parallel
+* Traffic is switched to the green version only after it passes checks
+* Rollback is as simple as switching back to blue
 
 ---
 
 ## 🛠 Prerequisites
+
 Before starting, ensure you have:
+
 1. **Google Cloud Project** with billing enabled
 2. **GKE Autopilot Cluster**
 3. **Google Artifact Registry** created
@@ -41,8 +42,8 @@ Before starting, ensure you have:
 ---
 
 ## 📂 Project Structure
-```
 
+```
 .
 ├── app/                   # Application source code
 │   ├── Dockerfile          # Production-ready Dockerfile
@@ -53,20 +54,20 @@ Before starting, ensure you have:
 │   ├── green-deployment.yaml
 │   └── service.yaml
 └── .github/workflows/      # GitHub Actions pipeline
-└── deploy.yml
-
-````
+    └── deploy.yml
+```
 
 ---
 
 ## 🔑 Setup Instructions
 
 ### 1️⃣ Enable APIs in GCP
+
 ```bash
 gcloud services enable \
   artifactregistry.googleapis.com \
   container.googleapis.com
-````
+```
 
 ### 2️⃣ Create Artifact Registry
 
@@ -153,12 +154,3 @@ kubectl apply -f k8s/blue-deployment.yaml
 ## 🧑‍💻 Author
 
 Built by **Otobong Godwin Edoho** — Demonstrating production-grade DevOps workflows.
-
----
-
-```
-
----
-
-If you want, I can now write you the **matching Kubernetes manifests (`blue-deployment.yaml`, `green-deployment.yaml`, `service.yaml`)** and the **GitHub Actions `deploy.yml`** so this README is actually runnable from scratch. That way, you’ll have a complete working project to push to GitHub.
-```
