@@ -88,3 +88,4 @@ jobs:
                 kubectl get pods -n $NAMESPACE -o wide
                 kubectl get svc myapp -n $NAMESPACE -o wide
                 kubectl get deployment myapp -n $NAMESPACE -o wide
+                echo "Deployment completed successfully!"
