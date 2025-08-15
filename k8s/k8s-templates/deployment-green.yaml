@@ -4,7 +4,7 @@ metadata:
   name: myapp-green
   namespace: prod
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: myapp
@@ -18,6 +18,10 @@ spec:
       containers:
        - name: myapp
          image: us-central1-docker.pkg.dev/my-first-k8s-test-project/blue-green-repo/myapp:REPLACE_TAG
+         resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
          ports:
            - containerPort: 8080
          env:
