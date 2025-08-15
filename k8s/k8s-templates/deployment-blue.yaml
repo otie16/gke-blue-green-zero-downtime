@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: myapp
-          image: us-central1-docker.pkg.dev/my-first-k8s-test-project/blue-green-repo/myapp:REPLACE_TAG
+          image: us-central1-docker.pkg.dev/REPLACE_GCP_PROJECT/blue-green-repo/myapp:REPLACE_TAG
           ports:
             - containerPort: 8080
           env:

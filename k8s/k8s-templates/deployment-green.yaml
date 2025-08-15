@@ -31,9 +31,9 @@ spec:
            httpGet:
              path: /readyz
              port: 8080
-        livenessProbe:
-          initialDelaySeconds: 2
-          periodSeconds: 10
-          httpGet:
-            path: /readyz
-            port: 8080
+         livenessProbe:
+           initialDelaySeconds: 2
+           periodSeconds: 10
+           httpGet:
+             path: /readyz
+             port: 8080
