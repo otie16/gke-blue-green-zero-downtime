@@ -92,12 +92,12 @@ jobs:
                 kubectl patch service myapp -n $NAMESPACE -p "{\"spec\":{\"selector\":{\"app\":\"myapp\",\"version\":\"${{ steps.live.outputs.target }}\"}}}"
                 kubectl get svc myapp -n $NAMESPACE -o yaml
 
-            - name: Show status
-              run: |
-                kubectl get pods -n $NAMESPACE -o wide
-                kubectl get svc myapp -n $NAMESPACE -o wide
-                kubectl get deployment myapp -n $NAMESPACE -o wide
-                echo "Deployment completed successfully!"
+            # - name: Show status
+            #   run: |
+            #     kubectl get pods -n $NAMESPACE -o wide
+            #     kubectl get svc myapp -n $NAMESPACE -o wide
+            #     kubectl get deployment myapp -n $NAMESPACE -o wide
+            #     echo "Deployment completed successfully!"
 
               
             # - name: Cleanup old deployment
