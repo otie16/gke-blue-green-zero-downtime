@@ -97,12 +97,11 @@ jobs:
             #     kubectl delete service myapp-${{ steps.live.outputs.current }} -n $NAMESPACE || true
             #     echo "Old deployment cleaned up successfully!"
 
-            # - name: Notify success
-            #   run: |
-            #     echo "Deployment to GKE completed successfully!"
-            #     echo "Current live version: ${{ steps.live.outputs.current }}"
-            #     echo "Newly deployed version: ${{ steps.live.outputs.target }}"
-            #     echo "You can access the application at: http://myapp.${{ secrets.GKE_DOMAIN }}"
+            - name: Notify success
+              run: |
+                echo "Deployment to GKE completed successfully!"
+                echo "Current live version: ${{ steps.live.outputs.current }}"
+                echo "Newly deployed version: ${{ steps.live.outputs.target }}"
             # - name: Notify failure
             #   if: failure()
             #   run: |
