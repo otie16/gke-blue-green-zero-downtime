@@ -81,7 +81,7 @@ jobs:
 
             - name: Apply target color (create/update)
               run: |
-                    kubectl apply -f rendered/deployment-${{ steps.live.outputs.target }}
+                    kubectl apply -f rendered/deployment-${{ steps.live.outputs.target }}.yaml
 
             - name: Wait for target deployment to be ready
               run: |
