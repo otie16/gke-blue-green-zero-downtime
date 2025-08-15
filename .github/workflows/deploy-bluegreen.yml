@@ -64,7 +64,7 @@ jobs:
               id: live
               run: |
                     set -e
-                    CURRENT=$(kubectl get deployment -n $NAMESPACE -o jsonpath='{.spec.selector.matchLabels.version}')
+                    CURRENT=$(kubectl get svc myapp -n $NAMESPACE -o jsonpath='{.spec.selector.version}')
                     echo "current=$CURRENT"
                     if [ "$CURRENT" == "blue" ]; then TARGET="green"; else TARGET="blue"; fi
                     echo "target=$TARGET"
