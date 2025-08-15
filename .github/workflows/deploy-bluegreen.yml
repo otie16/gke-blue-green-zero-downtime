@@ -5,6 +5,10 @@ on:
     branches:
       - master
 
+permissions:
+  id-token: write     
+  contents: read 
+
 env:
     REGION: ${{secrets.GKE_LOCATION}}
     PROJECT_ID: ${{secrets.GCP_PROJECT}}
@@ -25,7 +29,7 @@ jobs:
               uses: google-github-actions/auth@v2
               with:
                 workload_identity_provider: "projects/885928471498/locations/global/workloadIdentityPools/github-identity-pool/providers/github-idp"
-                service_account: "gh-actions-deployer@${{ env.PROJECT_ID }}.iam.gserviceaccount.com"
+                service_account: "gh-actions-deployer@${PROJECT_ID}.iam.gserviceaccount.com"
 
             - name: setup gcloud
               uses: google-github-actions/setup-gcloud@v2
