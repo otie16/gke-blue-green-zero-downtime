@@ -51,10 +51,10 @@ const html = (color, version) => `<!doctype html>
 </html>`;
 
 app.get("/", (_req, res) => res.type("html").send(html(COLOR, VERSION)));
-app.get("/healthz", (_req, res) => res.json({ status: "ok", color: COLOR, version: VERSION }));
+app.get("/healthz", (_req, res) => res.json({ status: "ok I am healthy", color: COLOR, version: VERSION }));
 app.get("/readyz", (_req, res) => {
   // Add real checks in production (DB, cache, deps)
-  res.json({ ready: true });
+  res.json({ ready: true, status: "Hello I'm ready to go" });
 });
 
 app.listen(PORT, () => console.log(`App on :${PORT} (${COLOR} ${VERSION})`));
