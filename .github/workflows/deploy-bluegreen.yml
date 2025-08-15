@@ -3,7 +3,7 @@ name: Deploy Blue-Green to GKE
 on:
   push:
     branches:
-      - main
+      - master
 
 env:
     REGION: ${{secrets.GKE_LOCATION}}
