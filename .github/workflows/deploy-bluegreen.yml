@@ -29,12 +29,12 @@ jobs:
               uses: google-github-actions/auth@v2
               with:
                 workload_identity_provider: "projects/885928471498/locations/global/workloadIdentityPools/github-identity-pool/providers/github-idp"
-                service_account: "gh-actions-deployer@${PROJECT_ID}.iam.gserviceaccount.com"
+                service_account: "gh-actions-deployer@${{ env.PROJECT_ID }}.iam.gserviceaccount.com"
 
             - name: setup gcloud
               uses: google-github-actions/setup-gcloud@v2
               with:
-                project_id: ${{ secrets.GCP_PROJECT }}
+                project_id: ${{ secrets.GKE_PROJECT }}
       
             - name: Configure Docker auth for Artifact Registry
               run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
