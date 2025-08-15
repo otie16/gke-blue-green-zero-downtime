@@ -74,8 +74,8 @@ jobs:
             - name: Render target deployment manifest
               run: |
                   mkdir -p rendered
-                  cp k8s/templates/deployment-${{ steps.live.outputs.target }}.yaml rendered/
-                  sed -i "s/REPLACE_GCP_PROJECT/${PROJECT_ID}/g" rendered/deployment-${{ steps.live.outputs.target }}.yaml"
+                  cp k8s/k8s-templates/deployment-${{ steps.live.outputs.target }}.yaml rendered/
+                  sed -i "s/REPLACE_GCP_PROJECT/${PROJECT_ID}/g" rendered/deployment-${{ steps.live.outputs.target }}.yaml
                   sed -i "s/REPLACE_TAG/${TAG}/g" rendered/deployment-${{ steps.live.outputs.target }}.yaml
                   cat rendered/deployment-${{ steps.live.outputs.target }}.yaml
 
