@@ -11,9 +11,9 @@ permissions:
 
 env:
     REGION: ${{secrets.GKE_LOCATION}}
-    PROJECT_ID: ${{secrets.GCP_PROJECT}}
+    PROJECT_ID: ${{secrets.GKE_PROJECT}}
     REPO: blue-green-repo
-    IMAGE: us-central1-docker.pkg.dev/${{secrets.GCP_PROJECT}}/blue-green-repo/myapp
+    IMAGE: us-central1-docker.pkg.dev/${{secrets.GKE_PROJECT}}/blue-green-repo/myapp
     CLUSTER: ${{secrets.GKE_CLUSTER}}
     NAMESPACE: prod
 
