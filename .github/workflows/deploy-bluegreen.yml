@@ -89,3 +89,24 @@ jobs:
                 kubectl get svc myapp -n $NAMESPACE -o wide
                 kubectl get deployment myapp -n $NAMESPACE -o wide
                 echo "Deployment completed successfully!"
+
+              
+            # - name: Cleanup old deployment
+            #   run: |
+            #     kubectl delete deployment myapp-${{ steps.live.outputs.current }} -n $NAMESPACE || true
+            #     kubectl delete service myapp-${{ steps.live.outputs.current }} -n $NAMESPACE || true
+            #     echo "Old deployment cleaned up successfully!"
+
+            # - name: Notify success
+            #   run: |
+            #     echo "Deployment to GKE completed successfully!"
+            #     echo "Current live version: ${{ steps.live.outputs.current }}"
+            #     echo "Newly deployed version: ${{ steps.live.outputs.target }}"
+            #     echo "You can access the application at: http://myapp.${{ secrets.GKE_DOMAIN }}"
+            # - name: Notify failure
+            #   if: failure()
+            #   run: |
+            #     echo "Deployment to GKE failed!"
+            #     echo "Current live version: ${{ steps.live.outputs.current }}"
+            #     echo "Attempted to deploy version: ${{ steps.live.outputs.target }}"
+            #     echo "Please check the logs for more details."
