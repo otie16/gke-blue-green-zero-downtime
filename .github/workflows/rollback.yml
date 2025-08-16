@@ -3,6 +3,10 @@ name: Rollback Blue-Green Deployment
 on:
   workflow_dispatch:
 
+permissions:
+  id-token: write     
+  contents: read 
+  
 env:
     REGION: ${{secrets.GKE_LOCATION}}
     PROJECT_ID: ${{secrets.GKE_PROJECT}}
