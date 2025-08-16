@@ -1,0 +1,46 @@
+name: Rollback Blue-Green Deployment
+
+on:
+  workflow_dispatch:
+
+env:
+    REGION: ${{secrets.GKE_LOCATION}}
+    PROJECT_ID: ${{secrets.GKE_PROJECT}}
+    CLUSTER: ${{secrets.GKE_CLUSTER}}
+    NAMESPACE: prod
+
+jobs:
+    rollback:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Auth to Google Cloud
+              uses: google-github-actions/auth@v2
+              with:
+                workload_identity_provider: "projects/885928471498/locations/global/workloadIdentityPools/github-demo-pool/providers/github"
+                service_account: "github-wif@${{ env.PROJECT_ID }}.iam.gserviceaccount.com"
+
+            - name: setup gcloud
+              uses: google-github-actions/setup-gcloud@v2
+              with:
+                project_id: ${{ secrets.GKE_PROJECT }}
+            
+            - name: Get GKE credentials (kubeconfig context download)
+              run: |
+                  gcloud container clusters get-credentials $CLUSTER --region $REGION --project $PROJECT_ID
+
+            - name: Get current Running colour
+              id: get_current_color
+              run: |
+                CURRENT=$(kubectl get svc myapp -n $NAMESPACE -o jsonpath='{.spec.selector.version}')
+                if [ "$CURRENT" == "green" ]; then TARGET="blue"; else TARGET="green"; fi
+                echo "Current running version: $CURRENT"
+                echo "current=$CURRENT" >> $GITHUB_OUTPUT
+                echo "target=$TARGET" >> $GITHUB_OUTPUT
+
+            - name: Rollback to previous version
+              run: |
+                kubectl patch svc myapp -n $NAMESPACE -p "{\"spec\":{\"selector\":{\"version\":\"${{ steps.get_current_color.outputs.target }}}}}"
+                kubectl get svc myapp -n $NAMESPACE -o wide
