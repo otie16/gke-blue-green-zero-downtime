@@ -6,7 +6,7 @@ on:
 permissions:
   id-token: write     
   contents: read 
-  
+
 env:
     REGION: ${{secrets.GKE_LOCATION}}
     PROJECT_ID: ${{secrets.GKE_PROJECT}}
@@ -30,10 +30,21 @@ jobs:
               uses: google-github-actions/setup-gcloud@v2
               with:
                 project_id: ${{ secrets.GKE_PROJECT }}
+
+            - name: Install gke-gcloud-auth-plugin
+              run: |
+                sudo apt-get update && sudo apt-get install -y apt-transport-https ca-certificates gnupg
+                echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | \
+                sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+                curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | \
+                sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+                sudo apt-get update && sudo apt-get install -y google-cloud-sdk-gke-gcloud-auth-plugin
+            
             
             - name: Get GKE credentials (kubeconfig context download)
               run: |
                   gcloud container clusters get-credentials $CLUSTER --region $REGION --project $PROJECT_ID
+                  kubectl get nodes
 
             - name: Get current Running colour
               id: get_current_color
